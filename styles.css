@@ -1,0 +1,258 @@
+/* ===== Brand Tokens (Your Palette) ===== */
+:root{
+  /* Primary */
+  --yellow:#FFC907;
+  --blue:#2E9DF7;
+
+  /* Secondary */
+  --light-blue:#8BD1CB;
+  --green:#4FCB53;
+  --orange:#FF902A;
+  --red:#F5402C;
+  --dark-green:#159A48;
+  --pink:#F16061;
+
+  /* Neutrals */
+  --ink:#1A1A1A;          /* deep charcoal */
+  --text:#FFFFFF;
+  --bg:#0B0B0B;           /* page background */
+  --surface:#111111;      /* section bg */
+  --surface-2:#0D0D0D;    /* alt section bg */
+
+  /* Effects */
+  --shadow:0 10px 30px rgba(0,0,0,.28);
+  --radius:18px;
+
+  /* Motion */
+  --t:240ms cubic-bezier(.22,.61,.36,1);
+}
+
+/* ===== Typography =====
+   Headings: Avenir/Avenir Next (system) -> Proxima Nova -> safe fallbacks
+   Body:     Proxima Nova -> system
+*/
+:root{
+  --font-headings: "Avenir Next", "Avenir", "Proxima Nova", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Proxima Nova", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+h1,h2,h3{
+  font-family:var(--font-headings);
+  line-height:1.15;
+  letter-spacing:.2px;
+  margin:0 0 8px;
+}
+.container{width:min(1100px,92%); margin-inline:auto}
+img{max-width:100%; height:auto; display:block}
+
+/* ===== Header / Logo ===== */
+.site-header{position:fixed; inset:0 0 auto 0; height:0; z-index:10}
+.logo{
+  position:fixed; top:20px; right:20px; width:72px; height:72px;
+  background:var(--yellow); border-radius:16px;
+  display:grid; place-items:center; box-shadow:var(--shadow);
+}
+.logo svg{width:70%; height:70%}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative; min-height:min(100vh, 860px);
+  display:grid; place-items:center;
+  text-align:center; padding:24px; overflow:hidden; isolation:isolate;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background-image:url('images/hero.jpg'); /* <- your hero image (corrected path) */
+  background-size:cover; background-position:center 35%;
+  filter:saturate(105%) contrast(105%); z-index:-2;
+}
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.24) 0%, rgba(0,0,0,.48) 58%, rgba(0,0,0,.68) 100%);
+  z-index:-1;
+}
+/* Left vertical rail text */
+.brand-rail{
+  position:absolute; left:6px; top:0; bottom:0; display:flex; align-items:center;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  letter-spacing:.08em; font-weight:700; opacity:.95;
+}
+/* Floating CTA pill — always centered */
+.cta-pill{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:28%;
+  background:var(--yellow); color:var(--ink); text-decoration:none;
+  padding:18px 24px; border-radius:var(--radius); box-shadow:var(--shadow);
+  font-size:1.05rem; font-weight:800; text-align:center; display:inline-block;
+  transition:transform var(--t), box-shadow var(--t), background-color var(--t);
+  z-index:5;
+}
+.cta-pill:hover{ background:color-mix(in srgb, var(--yellow) 88%, #000) ; transform:translateX(-50%) translateY(-2px); box-shadow:0 16px 40px rgba(0,0,0,.35); }
+
+.hero-copy{max-width:1100px; margin-inline:auto; animation:fadeUp 700ms var(--t) both}
+.hero-copy h1{
+  font-size:clamp(2.4rem, 6.2vw, 5rem);
+  font-weight:800; margin:0 0 12px;
+  text-shadow:0 2px 12px rgba(0,0,0,.45);
+}
+.hero-copy .sub{
+  font-size:clamp(1.05rem, 2.5vw, 1.65rem);
+  margin:0; text-shadow:0 2px 12px rgba(0,0,0,.55); opacity:.95;
+}
+
+/* ===== Value Prop ===== */
+.value-prop{background:var(--surface); padding:72px 0}
+.value-prop h2{font-size:clamp(1.7rem,4vw,2.4rem); color:var(--blue)}
+.value-prop p{opacity:.92}
+.checks{margin:10px 0 0; padding-left:18px; opacity:.95}
+.checks li::marker{ color: var(--light-blue); }
+
+/* ===== How it Works ===== */
+.how{background:#0E0E0E; padding:72px 0}
+.how h2{color:var(--blue); font-size:clamp(1.6rem,4vw,2.4rem)}
+.how-steps{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr) }
+.step{
+  background:#151515; padding:20px; border-radius:14px; box-shadow:var(--shadow);
+  transition:transform var(--t), box-shadow var(--t);
+}
+.step:hover{ transform: translateY(-4px) scale(1.01); box-shadow:0 16px 40px rgba(0,0,0,.35) }
+.num{
+  width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+  background:var(--green); color:#061D08; font-weight:900; margin-bottom:8px;
+}
+.step h3{margin:0 0 6px; font-size:1.1rem}
+
+/* ===== Stories ===== */
+.stories{background:#111111; padding:80px 0; text-align:center}
+.stories h2{color:var(--blue); font-size:clamp(1.8rem,4vw,2.5rem); margin-bottom:12px}
+.stories p{opacity:.9; max-width:720px; margin:0 auto 40px}
+.photo-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;
+}
+.photo-grid figure{
+  margin:0; background:#0D0D0D; border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+  transition:transform var(--t), box-shadow var(--t);
+}
+.photo-grid figure:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.45) }
+.photo-grid img{width:100%; height:auto; display:block}
+.photo-grid figcaption{font-size:.95rem; color:#fff; opacity:.85; padding:12px; background:rgba(0,0,0,.6)}
+
+/* ===== Impact ===== */
+.impact{background:#0A0A0A; padding:64px 0; text-align:center}
+.impact h2{color:var(--blue); font-size:clamp(1.6rem,4vw,2.4rem)}
+.stats{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+.stat{
+  background:#151515; padding:22px; border-radius:14px; box-shadow:var(--shadow);
+  transition:transform var(--t), box-shadow var(--t);
+}
+.stat:hover{ transform: translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.35) }
+.stat strong{display:block; font-size:1.9rem; color:var(--yellow)}
+.stat span{opacity:.9}
+.disclaimer{opacity:.7; margin-top:12px; font-size:.9rem}
+
+/* ===== Join ===== */
+.join{background:#101010; text-align:center; padding:80px 0; position:relative; overflow:hidden}
+.join h2{color:var(--blue); font-size:clamp(1.8rem,4vw,2.5rem); margin-bottom:12px}
+.join p{opacity:.9; max-width:650px; margin:0 auto 30px; line-height:1.6}
+.join-form{
+  display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:12px;
+  max-width:520px; margin:0 auto 24px;
+}
+.join-form input{
+  flex:1; min-width:220px; padding:14px 16px; border-radius:10px; border:none; font-size:1rem; outline:none;
+  background:#f7f7f7; color:#1a1a1a;
+}
+.join-form button{
+  padding:14px 20px; background:var(--yellow); color:var(--ink); border:none; border-radius:10px; font-weight:800; font-size:1rem;
+  cursor:pointer; box-shadow:var(--shadow); transition:all .3s ease;
+}
+.join-form button:hover{ background:color-mix(in srgb, var(--yellow) 88%, #000); transform:translateY(-2px) }
+.join .privacy{ font-size:.9rem; opacity:.75 }
+
+/* ===== CTA Stripe ===== */
+.cta{background:#111; padding:56px 0; text-align:center}
+.cta h2{color:var(--yellow); font-size:clamp(1.6rem,4vw,2.4rem)}
+.cta-button{
+  display:inline-block; background:var(--yellow); color:var(--ink); text-decoration:none;
+  padding:14px 26px; border-radius:14px; font-weight:800; box-shadow:var(--shadow);
+  transition:transform var(--t), box-shadow var(--t), background-color var(--t);
+}
+.cta-button:hover{ background:color-mix(in srgb, var(--yellow) 88%, #000); transform:translateY(-2px); box-shadow:0 16px 40px rgba(0,0,0,.35) }
+.small{opacity:.8; font-size:.9rem}
+
+/* ===== Footer ===== */
+.site-footer{background:#0A0A0A; padding:28px 0; text-align:center; font-size:.9rem; opacity:.85}
+
+/* ===== Animations (motion-safe) ===== */
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.hero-copy, .cta-pill{ animation:fadeUp 700ms var(--t) both }
+.hero-copy .sub{ animation:fadeUp 700ms var(--t) both; animation-delay:120ms }
+.how-steps .step{ animation:fadeUp 600ms var(--t) both }
+.how-steps .step:nth-child(2){ animation-delay:120ms }
+.how-steps .step:nth-child(3){ animation-delay:240ms }
+.photo-grid figure{ animation:fadeUp 600ms var(--t) both }
+.photo-grid figure:nth-child(2){ animation-delay:120ms }
+.photo-grid figure:nth-child(3){ animation-delay:240ms }
+.stats .stat{ animation:fadeUp 600ms var(--t) both }
+.stats .stat:nth-child(2){ animation-delay:120ms }
+.stats .stat:nth-child(3){ animation-delay:240ms }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+
+/* ===== Responsive ===== */
+/* Responsive tweaks: more granular control for hero, CTAs, logo, grids */
+@media (max-width:1200px){
+  .container{width:min(980px,94%)}
+}
+
+@media (max-width:900px){
+  .how-steps{grid-template-columns:1fr}
+  .hero{min-height:60vh; padding:20px}
+  .cta-pill{bottom:22%}
+  .brand-rail{left:4px; font-size:.95rem}
+}
+
+@media (max-width:680px){
+  .stats{grid-template-columns:1fr}
+  .hero{min-height:55vh; padding:18px}
+  /* Make the CTA more touch-friendly on narrow screens */
+  .cta-pill{
+    position:relative; left:auto; transform:none; bottom:auto; display:block; margin:18px auto; width:92%;
+    font-size:1rem; border-radius:12px;
+  }
+  /* Hide the decorative vertical rail on small screens */
+  .brand-rail{display:none}
+  /* Slightly smaller logo so it doesn't overlap content */
+  .logo{width:56px; height:56px; top:12px; right:12px}
+  .hero-copy h1{font-size:clamp(1.9rem,6.5vw,3.2rem)}
+}
+
+@media (max-width:520px){
+  .hero{min-height:50vh; padding:14px}
+  .cta-pill{width:100%; margin:12px 0 0}
+  .join-form{flex-direction:column; gap:10px}
+  .join-form input, .join-form button{width:100%}
+  /* make photo grid single column on very small devices to avoid tiny images */
+  .photo-grid{grid-template-columns:1fr}
+  .photo-grid figure{border-radius:12px}
+  .hero-copy .sub{font-size:1rem}
+}
+
+@media (max-width:360px){
+  .logo{width:48px; height:48px}
+  .cta-pill{padding:14px 16px; font-size:.98rem}
+  .hero-copy h1{font-size:clamp(1.6rem,7.5vw,2.6rem)}
+}
